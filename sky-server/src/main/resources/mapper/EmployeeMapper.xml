@@ -2,5 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
+<resultMap id="EmpResultMap" type="com.sky.entity.Employee">
+    <id column="id_number" property="idNumber"/>
+    <result column="create_time" property="createTime"/>
+    <result column="update_time" property="updateTime"/>
+    <result column="create_user" property="createUser"/>
+    <result column="update_user" property="updateUser"/>
+</resultMap>
 
+
+<select id="PageQuery" resultType="com.sky.entity.Employee" resultMap="EmpResultMap">
+    select * from employee
+    <where>
+        <if test="name!=null and name !=''">
+            and name like concat('%',#{name},'%')
+        </if>
+    </where>
+    order by create_time desc
+</select>
 </mapper>
