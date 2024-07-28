@@ -9,7 +9,11 @@
     <result column="create_user" property="createUser"/>
     <result column="update_user" property="updateUser"/>
 </resultMap>
-
+    <parameterMap id="EmpParameterMap" type="com.sky.entity.Employee">
+        <parameter property="idNumber" resultMap="EmpResultMap"></parameter>
+        <parameter property="updateTime" resultMap="EmpResultMap"></parameter>
+        <parameter property="updateUser" resultMap="EmpResultMap"></parameter>
+    </parameterMap>
 
 <select id="PageQuery" resultType="com.sky.entity.Employee" resultMap="EmpResultMap">
     select * from employee
@@ -20,4 +24,25 @@
     </where>
     order by create_time desc
 </select>
+    <select id="getById" resultType="com.sky.entity.Employee" resultMap="EmpResultMap">
+
+        select * from employee
+        where id=#{id}
+    </select>
+    <update id="update" parameterType="Employee" parameterMap="EmpParameterMap">
+        update employee
+        <set>
+         <if test="name!=null">  name =#{name}, </if>
+        <if test="username !=null">   username =#{username}, </if>
+         <if test="password !=null">  password =#{password}, </if>
+            <if test="phone!=null"> phone =#{phone}, </if>
+            <if test="sex !=null">  sex =#{sex}, </if>
+            <if test="idNumber !=null"> id_number =#{idNumber}, </if>
+            <if test="updateUser">  update_user =#{updateUser}, </if>
+            <if test="updateTime">  update_time =#{updateTime}, </if>
+            <if test="status !=null">  status =#{status}, </if>
+        </set>
+         where id =#{id}
+
+    </update>
 </mapper>
