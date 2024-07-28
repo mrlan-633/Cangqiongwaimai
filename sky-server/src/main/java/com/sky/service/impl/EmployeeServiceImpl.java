@@ -80,11 +80,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         //使用md5加密技术对密码进行加密 初始密码为123456
         employee.setPassword(DigestUtils.md5DigestAsHex(PasswordConstant.DEFAULT_PASSWORD.getBytes()));
         //设置记录时间
-        employee.setCreateTime(LocalDateTime.now());
-        employee.setUpdateTime(LocalDateTime.now());
+        //   employee.setCreateTime(LocalDateTime.now());
+        // employee.setUpdateTime(LocalDateTime.now());
 
-        employee.setCreateUser(BaseContext.getCurrentId());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+        //  employee.setCreateUser(BaseContext.getCurrentId());
+        // employee.setUpdateUser(BaseContext.getCurrentId());
         //因为局部线程变量需要手动结束
 
         employeeMapper.insert(employee);
@@ -108,8 +108,8 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .id(id)
                 .build();
 
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+       // employee.setUpdateTime(LocalDateTime.now());
+        //employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 
@@ -126,8 +126,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = new Employee();
         BeanUtils.copyProperties(employeeDTO, employee);
 
-        employee.setUpdateTime(LocalDateTime.now());
-        employee.setUpdateUser(BaseContext.getCurrentId());
+      //  employee.setUpdateTime(LocalDateTime.now());
+       // employee.setUpdateUser(BaseContext.getCurrentId());
         employeeMapper.update(employee);
     }
 
@@ -139,8 +139,8 @@ public class EmployeeServiceImpl implements EmployeeService {
            Employee employee = new Employee();
         passwordEditDTO.setNewPassword(DigestUtils.md5DigestAsHex(passwordEditDTO.getNewPassword().getBytes()));
         employee.setPassword(passwordEditDTO.getNewPassword());
-        employee.setUpdateUser(BaseContext.getCurrentId());
-        employee.setUpdateTime(LocalDateTime.now());
+       // employee.setUpdateUser(BaseContext.getCurrentId());
+      //  employee.setUpdateTime(LocalDateTime.now());
         employee.setId(passwordEditDTO.getEmpId());
            employeeMapper.update(employee);
        }
